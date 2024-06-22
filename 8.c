@@ -34,42 +34,6 @@ void prevent_zombie_processes() {
         pid = fork(); 
  
         if (pid == -1) { 
-            perror("fork");#include <stdio.h> 
-#include <stdlib.h> 
-#include <unistd.h> 
-#include <sys/wait.h> 
- 
-void create_zombie_process() { 
-    pid_t pid = fork(); 
- 
-    if (pid == -1) { 
-        perror("fork"); 
-        exit(EXIT_FAILURE); 
-    } else if (pid > 0) { 
-        // Parent process 
-        printf("Parent process created a zombie process (PID: %d)\n", pid); 
-    } else { 
-        // Child process 
-        printf("Zombie process created (PID: %d)\n", getpid()); 
-        exit(EXIT_SUCCESS); 
-    } 
-} 
- 
-void prevent_zombie_processes() { 
-    pid_t pid = fork(); 
- 
-    if (pid == -1) { 
-        perror("fork"); 
-        exit(EXIT_FAILURE); 
-    } else if (pid > 0) { 
-        // Parent process 
-        printf("Parent process created a child process (PID: %d)\n", pid); 
-        sleep(2);  // Wait for child to exit 
-    } else { 
-        // First child process 
-        pid = fork(); 
- 
-        if (pid == -1) { 
             perror("fork");  exit(EXIT_FAILURE); 
         } else if (pid > 0) { 
             // First child process exits immediately 
